@@ -19,6 +19,7 @@ class Node
 end
 
 class LinkedList
+  include Enumerable
   def initialize
     @store = []
   end
@@ -41,10 +42,12 @@ class LinkedList
   end
 
   def get(key)
-
+    x = @store.select {|node| node.key == key }[0]
+    x ? x.val : nil 
   end
 
   def include?(key)
+    @store.any? { |node| node.key == key }
   end
 
   def append(key, val)
@@ -57,16 +60,27 @@ class LinkedList
   end
 
   def update(key, val)
+    @store.each {|node| node.val = val if node.key == key }
   end
 
   def remove(key)
+    @store.each do |node| 
+      if node.key == key  
+        node.prev.next = node.next unless node.prev.nil?
+        node.next.prev = node.prev unless node.next.nil?
+        node.val = nil
+        node.prev = nil
+        node.next = nil
+      end
+    end
   end
 
   def each
+    @store.each { |node| yield node }
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, node| acc << "[#{node.key}, #{node.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, node| acc << "[#{node.key}, #{node.val}]" }.join(", ")
+  end
 end
