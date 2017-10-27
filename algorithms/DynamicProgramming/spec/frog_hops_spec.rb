@@ -32,7 +32,7 @@ describe 'Frog Hops Top Down' do
   end
 
   it 'should call helper method recursively' do
-    expect(dp).to receive(:frog_hops_top_down_helper).at_least(4).times.and_call_original
+    expect(dp).to receive(:frog_hops_top_down_helper).at_least(1).times.and_call_original
     dp.frog_hops_top_down_helper(4)
   end
 
