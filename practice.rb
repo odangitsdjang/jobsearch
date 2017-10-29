@@ -20,3 +20,4 @@ def LIS(arr)
   longest.max_by(&:length).length
 
 end
+
