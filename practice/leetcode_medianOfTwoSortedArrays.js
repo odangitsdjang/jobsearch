@@ -24,7 +24,7 @@
 // median(nums1, nums2);
 function findMedianSortedArrays(sorted1, sorted2) {
   let even = ((sorted1.length + sorted2.length) % 2 === 1) ? false : true;
-  while (sorted1.length > 2 || sorted2.length > 2) {
+  while (sorted1.length > 2 && sorted2.length > 2) {
     if (sorted1[Math.floor(sorted1.length / 2)] > sorted2[Math.floor(sorted2.length / 2)]) {
       sorted1.pop();
       sorted2.shift();
